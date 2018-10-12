@@ -12,12 +12,12 @@ ENV QT_INSTALLER_NAME qt-opensource-linux-x64-"$QT_VERSION".run
 ENV QT_INSTALLER_URL "$QT_ARCHIVE"/"$QT_VERSION_MAJOR"/"$QT_VERSION"/"$QT_INSTALLER_NAME"
 
 ENV QT_DIST /usr/local/Qt-"$QT_VERSION"
+ENV PATH $QT_DIST/bin:$PATH
 
 COPY ./qt-installer-noninteractive.qs ./
-RUN ls -a
 
-RUN curl -sSL $QT_INSTALLER_URL > $QT_INSTALLER_NAME \
-    && chmod +x $QT_INSTALLER_NAME \
-    && $QT_INSTALLER_NAME --script ./qt-installer-noninteractive.qs --platform minimal --verbose  ~/Qt
+RUN curl -sSL $QT_INSTALLER_URL > ./$QT_INSTALLER_NAME \
+ && ls -a \
+ && chmod +x $QT_INSTALLER_NAME \
+ && ./$QT_INSTALLER_NAME --script ./qt-installer-noninteractive.qs --platform minimal --verbose
 
-ENV PATH $QT_DIST/bin:$PATH
