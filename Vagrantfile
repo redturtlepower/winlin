@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
     ub.vm.provider "docker" do |d|
       d.name = "ubuntu"
       d.build_dir = "./ubuntu"
+      d.force_host_vm = true
       d.vagrant_vagrantfile = "./ubuntu/Vagrantfile"
       d.has_ssh = true
     end
