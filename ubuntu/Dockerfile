@@ -14,7 +14,7 @@ ENV QT_INSTALLER_NAME /qtbase-opensource-src-"$QT_VERSION"
 COPY ./qt-installer-noninteractive.qs ./
 RUN ls -a
 
-RUN curl -sSL $QT_INSTALLER \
+RUN curl -sSL $QT_INSTALLER_URL \
     && chmod +x $QT_INSTALLER_NAME \
     && $QT_INSTALLER_NAME --script ./qt-installer-noninteractive.qs --platform minimal --verbose  ~/Qt
 
