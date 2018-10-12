@@ -10,7 +10,7 @@ ENV QT_VERSION 5.11.2
 ENV QT_DIST /usr/local/Qt-"$QT_VERSION"
 ENV QT_INSTALLER_URL https://download.qt.io/official_releases/qt/"$QT_VERSION_MAJOR"/"$QT_VERSION"/qt-opensource-linux-x64-"$QT_VERSION".run
 ENV QT_INSTALLER_NAME /qtbase-opensource-src-"$QT_VERSION"
-vagran
+
 COPY ./vagrant/qt-installer-noninteractive.qs ./
 
 RUN curl -sSL $QT_INSTALLER \
