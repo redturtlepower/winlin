@@ -98,21 +98,16 @@ Controller.prototype.CredentialsPageCallback = function() {
 Controller.prototype.ComponentSelectionPageCallback = function() {
 	log("ComponentSelectionPageCallback");
 
-    if ($LIST_PACKAGES) {
-      var components = installer.components();
-      log("Available components: " + components.length);
-      var packages = ["Packages: "];
-
-      for (var i = 0 ; i < components.length ;i++) {
-		  packages.push(components[i].name);
-      }
-	  log(packages.join(" "));
-      
-      gui.clickButton(buttons.CancelButton);
-      return;
+    // Which packages can be selected?
+    var components = installer.components();
+    log("Available packages: " + components.length);
+    var packages = ["Packages: "];
+    for (var i = 0 ; i < components.length ;i++) {
+	    packages.push(components[i].name);
     }
-
-    log("Select components");
+	log(packages.join(" "));
+	  
+    log("Select packages");
 
     function trim(str) {
         return str.replace(/^ +/,"").replace(/ *$/,"");
@@ -129,7 +124,7 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
 	        widget.selectComponent(pkg);
         }
     } else {
-       log("Use default component list");
+       log("Use default package list");
     }
 
     gui.clickButton(buttons.NextButton, 3000);
