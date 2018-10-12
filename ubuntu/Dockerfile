@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 RUN apt-get update && \
     apt-get -y install -y \
-    build-essential libgl1-mesa-dev libassimp-dev libfontconfig1 libdbus-1-3
+    build-essential libgl1-mesa-dev libassimp-dev libfontconfig1 libdbus-1-3 curl
 
 ENV QT_VERSION_MAJOR 5.11
 ENV QT_VERSION 5.11.2
