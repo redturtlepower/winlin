@@ -143,11 +143,11 @@ Controller.prototype.IntroductionPageCallback = function() {
 
 
 Controller.prototype.TargetDirectoryPageCallback = function() {
-    log("Set target installation page: $OUTPUT");
+    log("Set target installation page: $QT_DIST");
     var widget = gui.currentPageWidget();
 
     if (widget != null) {
-        widget.TargetDirectoryLineEdit.setText("$OUTPUT");
+        widget.TargetDirectoryLineEdit.setText("$QT_DIST");
     }
     
     gui.clickButton(buttons.NextButton, 3000);
@@ -167,12 +167,12 @@ Controller.prototype.LicenseAgreementPageCallback = function() {
 
 Controller.prototype.ReadyForInstallationPageCallback = function() {
     log("Ready to install");
-    gui.clickButton(buttons.CommitButton);
+    gui.clickButton(buttons.CommitButton, 3000);
 }
 
 Controller.prototype.PerformInstallationPageCallback = function() {
     log("PerformInstallationPageCallback");
-    gui.clickButton(buttons.CommitButton);
+    gui.clickButton(buttons.CommitButton, 3000);
 }
 
 Controller.prototype.FinishedPageCallback = function() {
@@ -186,7 +186,7 @@ Controller.prototype.FinishedPageCallback = function() {
     }
     
     if (widget.RunItCheckBox) {
-		// LaunchQtCreatorCheckBoxForm may not works for newer version.
+		// LaunchQtCreatorCheckBoxForm may not work for newer version.
 		widget.RunItCheckBox.setChecked(false);
 	}
 
