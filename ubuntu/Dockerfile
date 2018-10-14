@@ -13,7 +13,7 @@ ENV QT_INSTALLER_URL "$QT_ARCHIVE"/"$QT_VERSION_MAJOR"/"$QT_VERSION"/"$QT_INSTAL
 
 ENV QT_DIST /usr/local/Qt-"$QT_VERSION"
 ENV PATH $QT_DIST/bin:$PATH
-ENV QT_INSTALL_PACKAGES gcc_64,qtquickcontrols,qtlocation,qtquick1,qtwebengine 
+# ENV QT_INSTALL_PACKAGES gcc_64,qtquickcontrols,qtlocation,qtquick1,qtwebengine 
 
 COPY ./qt-installer-noninteractive.qs ./
 COPY ./$QT_INSTALLER_NAME ./
@@ -21,5 +21,6 @@ COPY ./$QT_INSTALLER_NAME ./
 #RUN curl -sSL $QT_INSTALLER_URL > ./$QT_INSTALLER_NAME \
 RUN ls -a \
     && chmod +x $QT_INSTALLER_NAME \
-    && ./$QT_INSTALLER_NAME --script ./qt-installer-noninteractive.qs --platform minimal --verbose
+    && ./$QT_INSTALLER_NAME --script ./qt-installer-noninteractive.qs --platform minimal --verbose \
+    && rm ./$QT_INSTALLER_NAME
 
