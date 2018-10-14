@@ -127,6 +127,7 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
        log("Use default package list");
     }
 
+    widget.selectAll();
     gui.clickButton(buttons.NextButton, 3000);
 }
 
@@ -138,11 +139,13 @@ Controller.prototype.IntroductionPageCallback = function() {
 
 
 Controller.prototype.TargetDirectoryPageCallback = function() {
-    log("Set target installation page: $QT_DIST");
+    //log("Set target installation page: $QT_DIST");
+    log("Set target installation page: ~/Qt/Qt5.11.2");
     var widget = gui.currentPageWidget();
 
     if (widget != null) {
-        widget.TargetDirectoryLineEdit.setText("$QT_DIST");
+    //    widget.TargetDirectoryLineEdit.setText("$QT_DIST");
+        widget.TargetDirectoryLineEdit.setText("~/Qt/Qt5.11.2");
     }
     
     gui.clickButton(buttons.NextButton, 3000);
