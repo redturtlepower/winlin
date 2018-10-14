@@ -25,7 +25,9 @@ WORKDIR /home/jenkins
 # Configure SSH access
 COPY ./jenkins_slave_key.pub /.
 RUN mkdir -p /home/jenkins/.ssh
-RUN cat ./jenkins_slave_key.pub > /home/jenkins/.ssh/authorized_keys && rm -f ./jenkins_slave_key.pub
+RUN cat ./jenkins_slave_key.pub > /home/jenkins/.ssh/authorized_keys \
+# && rm -f ./jenkins_slave_key.pub
+
 RUN chown -R jenkins: /home/vagrant/.ssh
 RUN echo -n 'jenkins:jenkins' | chpasswd
 

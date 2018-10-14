@@ -1,9 +1,4 @@
 Vagrant.configure("2") do |config|
-
-  config.ssh.port = 2050
-  config.ssh.insert_key = false
-  config.ssh.username = 'docker'
-  config.ssh.password = 'tcuser'
     
   config.vm.define "ubuntu" do |ub|
     ub.vm.provider "docker" do |d|
@@ -14,6 +9,11 @@ Vagrant.configure("2") do |config|
       d.ports = ["2033:22"]
       d.has_ssh = true
     end
+  
+    ub.ssh.port = 2050
+    ub.ssh.insert_key = false
+    ub.ssh.username = 'docker'
+    ub.ssh.password = 'tcuser'
   end
 
 #  config.vm.define "wine" do |wi|
