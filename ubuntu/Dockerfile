@@ -1,4 +1,4 @@
-FROM phusion:baseimage:0.11
+FROM phusion/baseimage:0.11
 
 # enable ssh
 RUN rm -f /etc/service/sshd/down
