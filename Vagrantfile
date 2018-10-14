@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
       d.has_ssh = true
     end
     ub.ssh.port = 2033
+    ub.ssh.insert_key = false
   end
 
 #  config.vm.define "wine" do |wi|
