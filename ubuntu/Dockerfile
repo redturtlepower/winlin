@@ -21,6 +21,7 @@ COPY ./$QT_INSTALLER_NAME ./
 #RUN curl -sSL $QT_INSTALLER_URL > ./$QT_INSTALLER_NAME \
 RUN ls -a \
     && chmod +x $QT_INSTALLER_NAME \
-    && ./$QT_INSTALLER_NAME --script ./qt-installer-noninteractive.qs --platform minimal --verbose \
-    && rm ./$QT_INSTALLER_NAME
+    && ./$QT_INSTALLER_NAME --script ./qt-installer-noninteractive.qs --platform minimal --verbose /
+    && ls -a $QT_DIST
+RUN rm ./$QT_INSTALLER_NAME
 
