@@ -16,7 +16,7 @@ RUN apt-get update && \
     build-essential libgl1-mesa-dev libassimp-dev libfontconfig1 libdbus-1-3 curl
 
 RUN mkdir -p /var/run/sshd
-RUN chmod 0755 /var/runn/sshd
+RUN chmod 0755 /var/run/sshd
 
 # Create and configure jenkins user
 RUN useradd --create-home -s /bin/bash jenkins
