@@ -15,4 +15,12 @@ Vagrant.configure("2") do |config|
     
   # b2d doesnt support NFS
   config.nfs.functional = false  
+
+  config.vm.network "forwarded_port", host: 2030, guest: 2030
+  config.vm.network "public_network", ip: "192.168.2.220"
+
+  # add default gateway:
+  #config.vm.provision "shell", 
+  #  run: "always", 
+  #  inline: "route add default gw 192.168.2.1"
 end

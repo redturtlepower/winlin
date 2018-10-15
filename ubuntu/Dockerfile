@@ -17,6 +17,7 @@ RUN apt-get update && \
 
 RUN mkdir -p /var/run/sshd
 RUN chmod 0755 /var/run/sshd
+RUN echo -n 'root:root' | chpasswd
 
 # Create and configure jenkins user
 RUN useradd --create-home -s /bin/bash jenkins
@@ -26,8 +27,8 @@ WORKDIR /home/jenkins
 COPY ./jenkins_slave.pub /home/jenkins/
 RUN mkdir -p /home/jenkins/.ssh
 RUN cat ./jenkins_slave.pub > /home/jenkins/.ssh/authorized_keys
-
 RUN chown -R jenkins: /home/jenkins/.ssh
+
 # Set password to jenkins for user jenkins (like user:password).
 # Use parameter -n to not pass the quotation marks.
 RUN echo -n 'jenkins:jenkins' | chpasswd
