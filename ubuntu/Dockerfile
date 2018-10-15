@@ -22,13 +22,14 @@ RUN chmod 0755 /var/run/sshd
 RUN useradd --create-home -s /bin/bash jenkins
 WORKDIR /home/jenkins
 
-# Configure SSH access
-COPY ./jenkins_slave_key.pub /.
+# Configure SSH access 
+COPY ./jenkins_slave.pub /home/jenkins/
 RUN mkdir -p /home/jenkins/.ssh
-RUN cat ./jenkins_slave_key.pub > /home/jenkins/.ssh/authorized_keys \
-# && rm -f ./jenkins_slave_key.pub
+RUN cat ./jenkins_slave.pub > /home/jenkins/.ssh/authorized_keys
 
-RUN chown -R jenkins: /home/vagrant/.ssh
+RUN chown -R jenkins: /home/jenkins/.ssh
+# Set password to jenkins for user jenkins (like user:password).
+# Use parameter -n to not pass the quotation marks.
 RUN echo -n 'jenkins:jenkins' | chpasswd
 
 # Enable passwordless sudo for the "jenkins" user
