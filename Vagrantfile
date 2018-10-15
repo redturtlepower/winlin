@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
       d.name = "ubuntu"
       d.build_dir = "./ubuntu"
       d.force_host_vm = true
-      d.vagrant_vagrantfile = "./ubuntu/Vagrantfile"
+      d.vagrant_vagrantfile = "Vagrantfile.host"
       d.ports = ["2030:22"]
       d.has_ssh = true
     end
@@ -19,11 +19,11 @@ Vagrant.configure("2") do |config|
       d.name = "wine"
       d.build_dir = "./wine"
       d.force_host_vm = true
-      d.vagrant_vagrantfile = "./wine/Vagrantfile"
+      d.vagrant_vagrantfile = "Vagrantfile.host"
       d.ports = ["2040:22"]
       d.has_ssh = true
     end
-    wine.ssh.username = "jenkins"‚
+    wine.ssh.username = "jenkins"
   end
   
 end
