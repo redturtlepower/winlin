@@ -4,7 +4,7 @@ Vagrant.configure("2") do |config|
 
   # shared folders via rsync:
   config.vm.allowed_synced_folder_types = [:rsync]
-  config.vm.synced_folder "./provision", "/usr/share/", type: "rsync"
+  config.vm.synced_folder "./provision", "/usr/share", type: "rsync"
   
 
   # shared folders via NFS:    

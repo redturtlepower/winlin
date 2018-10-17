@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
       d.ports = ["2030:22"]
       d.has_ssh = true
     end
-    #ub.ssh.username = "jenkins"
+    ub.ssh.username = "jenkins"
   end
  
 #  config.vm.define" wine" do |wi|
