@@ -21,12 +21,16 @@ RUN echo -n 'root:root' | chpasswd
 
 # Create and configure jenkins user
 RUN useradd --create-home -s /bin/bash jenkins
-WORKDIR /home/jenkins
+#WORKDIR /home/jenkins
 
 # Configure SSH access 
-COPY ./jenkins_slave.pub /home/jenkins/
+#COPY ./jenkins_slave.pub /home/jenkins/
+COPY /usr/share/jenkins_slave.pub /home/jenkins/
 RUN mkdir -p /home/jenkins/.ssh
-RUN cat ./jenkins_slave.pub > /home/jenkins/.ssh/authorized_keys
+#RUN cat ./jenkins_slave.pub > /home/jenkins/.ssh/authorized_key
+RUN echo "/usr/share:" && ls -a /usr/share
+RUN cat /home/jenkins/jenkins_slave.pub > /home/jenkins/.ssh/authorized_keys
+
 RUN chown -R jenkins: /home/jenkins/.ssh
 
 # Set password to jenkins for user jenkins (like user:password).
@@ -48,7 +52,7 @@ ENV QT_DIST /usr/local/Qt-"$QT_VERSION"
 ENV PATH $QT_DIST/bin:$PATH
 # ENV QT_INSTALL_PACKAGES gcc_64,qtquickcontrols,qtlocation,qtquick1,qtwebengine 
 
-COPY ./qt-installer-noninteractive.qs ./
+#COPY ./qt-installer-noninteractive.qs ./
 #COPY ./$QT_INSTALLER_NAME ./
 
 #RUN curl -sSL $QT_INSTALLER_URL > ./$QT_INSTALLER_NAME \

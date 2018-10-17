@@ -13,7 +13,7 @@ CMD ["/sbin/my_init"]
 
 RUN apt-get update && \
     apt-get -y install -y \
-    build-essential libgl1-mesa-dev libassimp-dev libfontconfig1 libdbus-1-3 curl wine
+    build-essential libgl1-mesa-dev libassimp-dev libfontconfig1 libdbus-1-3 curl wine-stable
 
 RUN mkdir -p /var/run/sshd
 RUN chmod 0755 /var/run/sshd
