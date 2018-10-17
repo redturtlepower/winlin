@@ -30,7 +30,7 @@ RUN useradd --create-home -s /bin/bash jenkins
 #RUN echo "/usr/share:" && ls -a /usr/share
 RUN mkdir -p /home/jenkins/.ssh
 #RUN cat ./jenkins_slave.pub > /home/jenkins/.ssh/authorized_key
-ENV SSH_PUB_KEY_URL https://raw.githubusercontent.com/redturtlepower/winlin/master/ubuntu/provision/jenkins_slave.pub
+ENV SSH_PUB_KEY_URL https://raw.githubusercontent.com/redturtlepower/winlin/master/ubuntu/jenkins_slave.pub
 RUN curl $SSH_PUB_KEY_URL > /home/jenkins/.ssh/jenkins_slave.pub
 RUN cat /home/jenkins/.ssh/jenkins_slave.pub > /home/jenkins/.ssh/authorized_key
 #RUN echo -n "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDf/KEqXv7oCsl4xoOIbdJLP5NbNX18Xuq+qn5sb2FYYc1DfIocz0xPlSI+XuU3ckEOR6PnXj4f7oYCTutXD9iWuR6Vxy3y4hgXthW4z7aWrb9rVO8tB1m7q27/dUQoSb+ikPJpItJdBgOCIF5uY23mq5BlTBXTKaBCGGuebgnWusf1/7bujV5lNaABPY88RDJQIMP5oe8yNQ26Vf8EiPBufx7YaV7tS1xfL0EDM6qpydqKzhxJj46foS1XNkXE12Ia2VneDGCKSD597k1gSuORNyg9toC0KAwgVTixpTBgTqXXDYfX/2vt1QEgdJOYimWTKAYwHyBzDrnMl6QY1ym7 thomas.rusche@gmail.com" > /home/jenkins/.ssh/authorized_keyss
@@ -56,7 +56,7 @@ ENV QT_INSTALLER_URL "$QT_ARCHIVE"/"$QT_VERSION_MAJOR"/"$QT_VERSION"/"$QT_INSTAL
 ENV QT_DIST /usr/local/Qt-"$QT_VERSION"
 ENV PATH $QT_DIST/bin:$PATH
 # ENV QT_INSTALL_PACKAGES gcc_64,qtquickcontrols,qtlocation,qtquick1,qtwebengine 
-ENV QT_PROVISIONER_SCRIPT_URL https://raw.githubusercontent.com/redturtlepower/winlin/master/ubuntu/provision/qt-installer-noninteractive.qs
+ENV QT_PROVISIONER_SCRIPT_URL https://raw.githubusercontent.com/redturtlepower/winlin/master/ubuntu/qt-installer-noninteractive.qs
 
 #COPY ./qt-installer-noninteractive.qs ./
 #COPY ./$QT_INSTALLER_NAME ./
