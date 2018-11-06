@@ -1,7 +1,12 @@
 Vagrant.configure("2") do |config|
 
   config.vm.box = "hashicorp/boot2docker"
+
   config.vm.allowed_synced_folder_types = [:rsync]
+  config.vm.synced_folder ".", "/usr/share", type: "rsync", disabled: true  
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  #config.vm.synced_folder "/Users/jenkins/Desktop/installers/linux", "/usr/local/bin", disabled: false
+
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
     v.check_guest_additions = false
@@ -12,13 +17,12 @@ Vagrant.configure("2") do |config|
   config.ssh.insert_key = true
   config.ssh.username = 'docker'
   config.ssh.password = 'tcuser'
-    
-  # b2d doesnt support NFS
-  config.nfs.functional = false  
 
-  config.vm.network "public_network", ip: "192.168.2.221"
-  # ubuntu build env:
+  config.vm.network "public_network", ip: "192.168.2.221", bridge: "en0: Ethernet"
+  # ubuntu:
   config.vm.network "forwarded_port", host: 2030, guest: 2030
-  # windows bui‚ld env in wine:
+  #config.vm.network "forwarded_port", host: 2223, guest: 22
+  # wine:
   config.vm.network "forwarded_port", host: 2040, guest: 2040
+  #config.vm.network "forwarded_port", host: 2224, guest: 22
 end

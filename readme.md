@@ -19,3 +19,27 @@ Use `vagrant up` to build an Ubuntu Bionic 18.04 box that users the docker provi
 The ubuntu box installs Qt.
 The ubuntu wine box uses a pre-zipped folder with msvc toolchain.
 
+
+
+Some useful commands:
+
+Destroy a vagrant box via global status to get its id and then use destroy:
+vagrant global-status
+vagrant global-status --prune
+vagrant destroy <id> -f
+
+Stop vagrant:
+vagrant halt
+
+vagrant up
+vagrant up ubuntu
+vagrant reload 
+vagrant reload ubuntu
+
+
+log in to boot2docker host vm:
+ssh -p 2222 docker@localhost
+
+log in to ubuntu/wine on docker:
+ssh -p 2030 jenkins@192.168.2.221
+ssh -p 2040 jenkins@192.168.2.221
