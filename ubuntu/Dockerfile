@@ -41,8 +41,11 @@ RUN mkdir -p /etc/sudoers.d  \
   && install -b -m 0440 /dev/null /etc/sudoers.d/jenkins \
   && echo 'jenkins ALL=NOPASSWD: ALL' >> /etc/sudoers.d/jenkins
 
+COPY ./provision.sh /home/jenkins/provision.sh
+CMD ["/bin/bash", "/home/jenkins/provision.sh"]
+
 # Install Qt development dependencies
-RUN git clone "https://github.com/redturtlepower/qt-installer.git" && cd qt-installer && chmod +x setup.sh && bash setup.sh
+# RUN git clone "https://github.com/redturtlepower/qt-installer.git" && cd qt-installer && chmod +x setup.sh && bash setup.sh
 
 # Install Android development dependencies (Android SKD + NDK, Java JDK)
 # https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.zip 

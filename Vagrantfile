@@ -4,7 +4,11 @@ Vagrant.configure("2") do |config|
   
   #config.vm.synced_folder ".", "/vagrant", disabled: true  
 
-  config.vm.boot_timeout = 360
+  config.vm.boot_timeout = 60
+  config.ssh.insert_key = false
+  config.ssh.port = 2222
+  #config.ssh.username = 'docker'
+  #config.ssh.password = 'tcuser'
   
   # Change `true` to `false` if you load the docker from an image instead of building it!
   def is_dev_mode
@@ -20,12 +24,11 @@ Vagrant.configure("2") do |config|
         d.image = "buildenv-ubuntu"
       end 
       d.force_host_vm = true
-      #d.volumes = ["/usr/local/bin:/usr/local/bin"]
+      d.volumes = ["/User/jenkins/Desktop/installers:/home/docker/installers"]
       d.vagrant_vagrantfile = "Vagrantfile.host"
       d.ports = ["2030:22"]
       d.has_ssh = true
     end
-    ub.ssh.username = "jenkins"
   end
  
   config.vm.define "wine" do |wi|

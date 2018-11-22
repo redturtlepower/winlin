@@ -1,23 +1,24 @@
+#!/usr/bin/ruby
+
 Vagrant.configure("2") do |config|
 
   config.vm.box = "hashicorp/boot2docker"
 
-  #config.vm.allowed_synced_folder_types = [:rsync]
-  config.vm.allowed_synced_folder_types = []
+  config.vm.allowed_synced_folder_types = [:rsync]
   config.vm.synced_folder ".", "/usr/share", type: "rsync", disabled: true  
   config.vm.synced_folder ".", "/vagrant", disabled: true
   #config.vm.synced_folder "/Users/jenkins/Desktop/installers/linux", "/usr/local/bin", disabled: false
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
-    v.check_guest_additions = false
+    v.check_guest_additions = true
     v.functional_vboxsf = false
   end
   
-  config.ssh.port = 2222
-  config.ssh.insert_key = true
-  config.ssh.username = 'docker'
-  config.ssh.password = 'tcuser'
+  #config.ssh.port = 2222
+  #config.ssh.insert_key = true
+  #config.ssh.username = 'docker'
+  #config.ssh.password = 'tcuser'
 
   config.vm.network "public_network", ip: "192.168.2.221", bridge: "en0: Ethernet"
   # ubuntu:

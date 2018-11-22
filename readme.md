@@ -20,6 +20,11 @@ The ubuntu box installs Qt.
 The ubuntu wine box uses a pre-zipped folder with msvc toolchain.
 
 
+Development/Production usage
+==========
+To develop and test the vagrantfiles, use `vagrant up ubuntu-build`. This builds the docker images each time.
+If that works, build a docker image and push it to the local registry. Then use vagrantfile.prod which uses those pre-created images to speed things up.
+
 
 Some useful commands:
 
