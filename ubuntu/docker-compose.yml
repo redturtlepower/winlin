@@ -1,9 +1,10 @@
 version: '3.1'
 services:
-  master:
-    build: . 
+  buildenv:
+    build: ./ubuntu
     ports:
     - "2030:22"
     volumes:
     - /Users/jenkins/Desktop/installers/linux:/var/installers
-    restart: always       
+    - /Users/jenkins/Desktop/artifacts:/var/artifacts
+    restart: always

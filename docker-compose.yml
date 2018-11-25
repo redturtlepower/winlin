@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  desktop-linux-buildenv:
+    #build: ./ubuntu
+    image: ubuntu-buildenv
+    ports:
+    - "2030:22"
+    volumes:
+    - /Users/jenkins/Desktop/installers/linux:/var/installers
+    - /Users/jenkins/Desktop/artifacts:/var/artifacts
+    restart: always
+  desktop-windows-buildenv:
+    build: ./wine
+    ports:
+    - "2040:22"
+    volumes:
+    - /Users/jenkins/Desktop/artifacts:/var/artifacts
+    restart: always 
+  mobile-android-buildenv:
+    build: ./android
+    ports:
+    - "2050:22"
+    volumes:
+    - /Users/jenkins/Desktop/installers/linux:/var/installers
+    - /Users/jenkins/Desktop/artifacts:/var/artifacts
+    restart: always
