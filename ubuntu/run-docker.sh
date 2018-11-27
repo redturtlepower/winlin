@@ -22,7 +22,6 @@ if ! ( ${DOCKER} images | grep ${NAME} )
 then
 	echo "The image '${NAME}' does not exist yet. Building..."
 	${DOCKER} build . --rm --tag ${NAME}
-	${DOCKER} run -it -d --rm --name provision_buildenv -v /Users/jenkins/Desktop/installers/windows:/var/installers ${NAME}:latest
 
 	# Stop the provisioning container.
 	echo "Checking if the container 'provision_buildenv' is running."
@@ -34,6 +33,7 @@ then
 		echo "The container 'provision_buildenv' is not running."
 	fi
 
+	${DOCKER} run -it -d --rm --name provision_buildenv -v /Users/jenkins/Desktop/installers/windows:/var/installers ${NAME}:latest
 	${DOCKER} exec -it provision_buildenv /bin/bash /home/jenkins/provision.sh
 	${DOCKER} commit provision_buildenv ${NAME}
 	# Stop the provisioning container.
