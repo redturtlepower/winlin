@@ -1,11 +1,11 @@
-if [ "$(ls -a qt-installer)" ]; then
-	echo "The directory 'qt-installer' is not empty. It is assumed that Qt has been installed already."
-else
-	echo "The directory 'qt-installer' is empty. Cloning repo and installing Qt..."
-	git clone "https://github.com/redturtlepower/qt-installer.git" && cd qt-installer && chmod +x setup.sh && bash setup.sh
-fi
+echo "On wine the qt provisioner does not use the official qt installer. This script only copy the required files, which are required for compiling with MSVC, from the mounted volume to the wine dir."
+echo "Copying files to ~/.wine/drive_c/"
+mkdir -p /home/jenkins/.wine/drive_c
 
-# docker-build --no-cache -t ubuntu-qt 
-# docker run ubuntu-qt # to run startup cmd (install qt)
-# docker commit -t ubuntu-qt
-# docker exec -it ubuntu-qt-buildenv /bin/bash
+cp -R /var/installers/qt511-msvc/buildenv/. /home/jenkins/.wine/drive_c/buildenv/
+# Give user jenkins permissions:
+chown -R jenkins:jenkins /home/jenkins/.wine
+
+# dpkg --add-architecture i386 && apt-get update && apt-get install wine32
+
+# cp: cannot create directory '/home/jenkins/.wine/drive_c/buildenv/': No such file or directory

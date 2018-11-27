@@ -1,10 +1,15 @@
 FROM ubuntu:bionic
-
+RUN dpkg --add-architecture i386
 RUN apt-get update && \
     apt-get -y install -y \
-    build-essential mesa-common-dev libglu1-mesa-dev libfontconfig1 openssh-server git curl openjdk-8-jdk wine-stable
+    build-essential mesa-common-dev libglu1-mesa-dev libfontconfig1 openssh-server git curl openjdk-8-jdk wine-stable wine32 # xvfb
 #RUN apk add --update --no-cache \
 #    build-essential mesa-common-dev libglu1-mesa-dev libfontconfig1 openssh-server git curl openjdk-8-jdk  
+
+# && apt-get update && apt-get install wine32
+
+# Wine requires X Server so tell it the display:
+# ENV DISPLAY :0
 
 # Create and configure jenkins user
 RUN useradd --create-home -s /bin/bash jenkins
