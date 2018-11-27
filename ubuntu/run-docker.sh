@@ -3,7 +3,7 @@
 NAME=ubuntu_buildenv
 # The port to listen on SSH on the host (is mapped to port 22 inside docker):
 PORT=2030
-DOCKER=${DOCKER}
+DOCKER=/usr/local/bin/docker
 
 # If the container is running stop it now.
 echo "Checking if the container '${NAME}' is running."
