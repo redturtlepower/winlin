@@ -25,7 +25,7 @@ fi
 # If the image does not exist, build it.
 # The run the provisioner that installs the dependencies which are mounted in a volume, then commit the image.
 echo "Checking if the image '${NAME}' needs to be build."
-if ! ( docker images | grep ${NAME} ) or ( $FORCE_IMAGE_REBUILD = true )
+if [ ! ( docker images | grep ${NAME} ) ] || [ ( $FORCE_IMAGE_REBUILD = true ) ]
 then
 	echo "The image '${NAME}' does not exist yet. Building..."
 	docker build . --rm --tag ${NAME}
