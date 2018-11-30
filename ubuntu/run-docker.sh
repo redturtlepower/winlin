@@ -3,6 +3,7 @@
 NAME=ubuntu_buildenv
 # The port to listen on SSH on the host (is mapped to port 22 inside docker):
 PORT=2030
+FORCE_IMAGE_REBUILD=true
 
 # To use the variable docker, replace all 'docker' commands with ${DOCKER}
 # DOCKER=/usr/local/bin/docker
@@ -24,7 +25,7 @@ fi
 # If the image does not exist, build it.
 # The run the provisioner that installs the dependencies which are mounted in a volume, then commit the image.
 echo "Checking if the image '${NAME}' needs to be build."
-if ! ( docker images | grep ${NAME} )
+if ! ( docker images | grep ${NAME} ) or ( $FORCE_IMAGE_REBUILD = true )
 then
 	echo "The image '${NAME}' does not exist yet. Building..."
 	docker build . --rm --tag ${NAME}
