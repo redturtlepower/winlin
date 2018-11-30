@@ -8,7 +8,7 @@ PORT=2030
 # DOCKER=/usr/local/bin/docker
 # Alternatively, just use an environment variable:
 echo "PATH before extending: " ${PATH}
-export PATH=/usr/local/bin;/usr/bin;/bin;${PATH}
+export PATH=/usr/local/bin:/usr/bin:/bin:${PATH}
 echo "PATH: " $PATH
 
 # If the container is running stop it now.
