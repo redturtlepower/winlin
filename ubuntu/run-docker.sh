@@ -7,7 +7,7 @@ PORT=2030
 # To use the variable docker, replace all 'docker' commands with ${DOCKER}
 # DOCKER=/usr/local/bin/docker
 # Alternatively, just use an environment variable:
-export PATH=/usr/local/bin/docker;${PATH}
+export PATH=/usr/local/bin;${PATH}
 echo "PATH: " $PATH
 
 # If the container is running stop it now.
