@@ -38,8 +38,8 @@ then
 		echo "The container 'provision_buildenv' is not running."
 	fi
 
-	docker run -it -d --rm --name provision_buildenv -v /Users/jenkins/Desktop/installers/windows:/var/installers ${NAME}:latest
-	docker exec -it provision_buildenv /bin/bash /home/jenkins/provision.sh
+	docker run -d --rm --name provision_buildenv -v /Users/jenkins/Desktop/installers/windows:/var/installers ${NAME}:latest
+	docker exec provision_buildenv /bin/bash /home/jenkins/provision.sh
 	docker commit provision_buildenv ${NAME}
 	# Stop the provisioning container.
 	docker stop provision_buildenv
