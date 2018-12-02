@@ -5,7 +5,3 @@ mkdir -p /home/jenkins/.wine/drive_c
 cp -R /var/installers/qt511-msvc/buildenv/. /home/jenkins/.wine/drive_c/buildenv/
 # Give user jenkins permissions:
 chown -R jenkins:jenkins /home/jenkins/.wine
-
-# dpkg --add-architecture i386 && apt-get update && apt-get install wine32
-
-# cp: cannot create directory '/home/jenkins/.wine/drive_c/buildenv/': No such file or directory
