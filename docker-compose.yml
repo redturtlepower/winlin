@@ -2,7 +2,7 @@ version: '3.1'
 services:
   linux:
     #build: ./ubuntu
-    image: ubuntu-buildenv
+    image: ubuntu_buildenv
     ports:
     - "2030:22"
     volumes:
@@ -10,7 +10,7 @@ services:
     - /Users/jenkins/Desktop/artifacts:/var/artifacts
     restart: always
   windows:
-    build: ./wine
+    image: wine_buildenv
     ports:
     - "2040:22"
     volumes:
@@ -18,7 +18,7 @@ services:
     - /Users/jenkins/Desktop/artifacts:/var/artifacts
     restart: always 
   android:
-    build: ./android
+    image: android_buildenv
     ports:
     - "2050:22"
     volumes:

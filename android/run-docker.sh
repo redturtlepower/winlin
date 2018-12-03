@@ -1,5 +1,6 @@
 # Parameters
 # The image and container name:
+BASENAME=buildenv_base
 NAME=android_buildenv
 # The port to listen on SSH on the host (is mapped to port 22 inside docker):
 PORT=2050
@@ -43,7 +44,7 @@ then
 		echo "The container 'provision_buildenv' is not running."
 	fi
 
-	docker run -d --rm --name provision_buildenv -v ./provision:/var/provision -v /Users/jenkins/Desktop/installers/linux:/var/installers buildenv_base:latest
+	docker run -d --rm --name provision_buildenv -v /Users/jenkins/winlin/android/provision:/var/provision -v /Users/jenkins/Desktop/installers/linux:/var/installers ${BASENAME}:latest
 	# docker exec provision_buildenv /bin/bash /home/jenkins/provision.sh
 	docker exec provision_buildenv /bin/bash /var/provision/provision.sh
 	docker commit provision_buildenv ${NAME}

@@ -3,7 +3,7 @@
 NAME=wine_buildenv
 # The port to listen on SSH on the host (is mapped to port 22 inside docker):
 PORT=2040
-FORCE_IMAGE_REBUILD=true
+FORCE_IMAGE_REBUILD=false
 
 # To use the variable docker, replace all 'docker' commands with ${DOCKER}
 # DOCKER=/usr/local/bin/docker
@@ -40,8 +40,9 @@ then
 		echo "The container 'provision_buildenv' is not running."
 	fi
 
-	docker run -d --rm --name provision_buildenv -v /Users/jenkins/Desktop/installers/windows:/var/installers ${NAME}:latest
-	docker exec provision_buildenv /bin/bash /home/jenkins/provision.sh
+	docker run -d --rm --name provision_buildenv -v /Users/jenkins/winlin/wine/provision:/var/provision  -v /Users/jenkins/Desktop/installers/windows:/var/installers ${NAME}:latest
+	# docker exec provision_buildenv /bin/bash /home/jenkins/provision.sh
+	docker exec provision_buildenv /bin/bash /var/provision/provision.sh
 	docker commit provision_buildenv ${NAME}
 	# Stop the provisioning container.
 	docker stop provision_buildenv

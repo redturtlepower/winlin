@@ -1,5 +1,6 @@
 # Parameters
 # The image and container name:
+BASENAME=buildenv_base
 NAME=ubuntu_buildenv
 # The port to listen on SSH on the host (is mapped to port 22 inside docker):
 PORT=2030
@@ -28,7 +29,10 @@ echo "Checking if the image '${NAME}' needs to be build."
 if ( !  ( docker images ) | grep ${NAME} )  || ( $FORCE_IMAGE_REBUILD = true )
 then
 	echo "The image '${NAME}' does not exist yet or has been forced to rebuild. Building..."
-	docker build . --rm --tag ${NAME}
+	
+	# The base image 'buildenv_base' must have been build already!
+	# To build this image 'android_buildenv', only the provision script needs to be run!
+	# docker build . --rm --tag ${NAME}
 
 	# Stop the provisioning container.
 	echo "Checking if the container 'provision_buildenv' is running."
@@ -40,8 +44,9 @@ then
 		echo "The container 'provision_buildenv' is not running."
 	fi
 
-	docker run -d --rm --name provision_buildenv -v /Users/jenkins/Desktop/installers/linux:/var/installers ${NAME}:latest
-	docker exec provision_buildenv /bin/bash /home/jenkins/provision.sh
+	docker run -d --rm --name provision_buildenv -v /Users/jenkins/winlin/ubuntu/provision:/var/provision -v /Users/jenkins/Desktop/installers/linux:/var/installers ${BASENAME}:latest
+	# docker exec provision_buildenv /bin/bash /home/jenkins/provision.sh
+	docker exec provision_buildenv /bin/bash /var/provision/provision.sh
 	docker commit provision_buildenv ${NAME}
 	# Stop the provisioning container.
 	docker stop provision_buildenv
