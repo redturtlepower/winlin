@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 RUN dpkg --add-architecture i386
 RUN apt-get update && \
     apt-get -y install -y \
-    build-essential mesa-common-dev libglu1-mesa-dev libfontconfig1 openssh-server git curl openjdk-8-jdk
+    build-essential mesa-common-dev libglu1-mesa-dev libfontconfig1 openssh-server git curl nano libxkbcommn-x11-0 openjdk-8-jdk
 
 # Create and configure jenkins user
 RUN useradd --create-home -s /bin/bash jenkins

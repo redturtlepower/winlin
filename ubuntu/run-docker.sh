@@ -6,6 +6,17 @@ NAME=ubuntu_buildenv
 PORT=2030
 FORCE_IMAGE_REBUILD=false
 
+# PARAMETERS
+START_CONTAINER=false # Option -r     Example: 'bash run-docker.sh -r'
+while getopts r option # handle more options by : separator. Example: 'getopts r:x:s: option'
+do
+case "${option}"
+in
+r) START_CONTAINER=true;; #get value (if any) with '${OPTARG}'
+esac
+done
+
+
 # To use the variable docker, replace all 'docker' commands with ${DOCKER}
 # DOCKER=/usr/local/bin/docker
 # Alternatively, just use an environment variable:
@@ -15,9 +26,10 @@ echo "PATH: " $PATH
 
 # If the container is running stop it now.
 echo "Checking if the container '${NAME}' is running."
-if docker ps | grep ${NAME}; then
+if docker container ls | grep ${NAME}; then
 	echo "Stopping container '${NAME}'..."
 	docker stop ${NAME}
+	docker rm ${NAME}
 	echo "Stopped."
 else
 	echo "The container '${NAME}' is not running."
@@ -54,15 +66,36 @@ then
 else
 	echo "The image '${NAME}' does already exist."
 fi
+docker stop ${NAME}
 
-# Start the container.
-docker run -it -d --rm --name ${NAME} -v /Users/jenkins/Desktop/artifacts:/var/artifacts -p "${PORT}:22" ${NAME}:latest
+
+if ($START_CONTAINER)
+# Run the container.
+# Fails if there is a stopped container with the same NAME.
+# Check stopped containers with 'docker ps a' or 'docker container list -a'
+# Error message:
+#Thomass-Mac-mini:ubuntu jenkins$ docker run -it -d --rm --name ubuntu_buildenv -v /Users/jenkins/Desktop/artifacts:/var/artifacts -p "2030:22" ubuntu_buildenv:latest
+#docker: Error response from daemon: Conflict. The container name "/ubuntu_buildenv" is already in use by container "59541e117e80b5e3bf1c331592ff79970b92e4a1774441f3c0245adea9ae4d93". You have to remove (or rename) that container to be able to reuse that name.
+#docker start --name ubuntu_buildenv
+then
+  if ( docker container ls -a | grep ${NAME} ) # search for NAME in ALL containers (running and stopped ones)
+  then
+    echo "Starting existing container."
+    docker start ${NAME}
+  else
+    echo "Running a new container."
+    docker run -it -d --rm --name ${NAME} -v /Users/jenkins/Desktop/artifacts:/var/artifacts -p "${PORT}:22" ${NAME}:latest
+  fi
+else
+echo "Not starting the container at the end."
+fi
+
 
 # Print the running containers
-if docker ps | grep ${NAME}; then
-	echo "The container '${NAME}' is up and running!"
+if docker container ls | grep ${NAME}; then
+	echo "The container '${NAME}' is up and running."
 else
-	echo "The container '${NAME}' could not be started!"
+	echo "The container '${NAME}' is not running."
 fi
-docker ps 
+docker container ls
 

@@ -26,6 +26,11 @@ git clone https://github.com/redturtlepower/qt-installer.git
 cd qt-installer
 bash qt-installer.sh --list-packages --filedir="/var/installers/" --filename="qt-opensource-linux-x64-5.12.8.run"
 bash qt-installer.sh --filedir="/var/installers/" --filename="qt-opensource-linux-x64-5.12.8.run" --version=5.12.8 --packages="qt.qt5.qt5128.gcc_64 qt.qt5.5128.qtwebengine qt.qt5.5128.qtnetworkauth" --installdir="/home/jenkins/Qt" --cleanup
+exit
+
+Now save changes in a new image
+docker commit <container name> ubuntu_buildenv
+
 
 Error from installer:
 libxkbcommon-x11 cannot open shared object file: No such file or directory
